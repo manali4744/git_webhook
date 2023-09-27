@@ -1,0 +1,4 @@
+env/
+gitwebhook/.env
+gitwebhook/db.sqlite3
+*.pyc
