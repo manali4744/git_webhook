@@ -104,7 +104,16 @@ def GithubView(request):
 def FigmaView(request):
     if request.method == "POST":
         print(request)
-        print(request.body)
+        payload = request.body
+        data = json.loads(payload)
+        try:
+            print(payload)
+            print("Event_Type" ,data['event_type'])
+            print("File Key", data['file_key'])
+            print("File Name",data['file_name'])
+        except:
+            print(payload)
+
     return HttpResponse("hello")
 
 
