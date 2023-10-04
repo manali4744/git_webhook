@@ -46,7 +46,7 @@ def get_diff_commit_after_ID(commit_after_ID, full_name):
 
 @require_POST
 @csrf_exempt
-def hello(request):
+def GithubView(request):
     # Verify if request came from GitHub
     forwarded_for = u'{}'.format(request.META.get('HTTP_X_FORWARDED_FOR'))
     client_ip_address = ip_address(forwarded_for)
@@ -96,4 +96,81 @@ def hello(request):
         return HttpResponse('success')
 
     # In case we receive an event that's not ping or push
+    return HttpResponse(status=204)
+
+
+@require_POST
+@csrf_exempt
+def FigmaView(request):
+    if request.method == "POST":
+        print(request)
+        print(request.body)
+    return HttpResponse("hello")
+
+
+@require_POST
+@csrf_exempt
+def JiraCRUDView(request):
+    if request.method == "POST":
+        payload = request.body
+        data = json.loads(payload)
+        print(data)
+        event = data['webhookEvent']
+        try:
+            user = data['user']['displayName']
+            print(user)
+        except:
+            user = None
+        try:
+            event_type = data['issue_event_type_name']
+        except:
+            event_type= None
+        try:
+            body = data['body']
+            print(body)
+        except:
+            pass
+        try:
+            issue = data['issue']['key']
+        except:
+            issue = None
+
+        try:
+            lastViewed = data['issue']['fields']['lastViewed']
+        except:
+            lastViewed = None
+        try:
+            project = data['issue']['fields']['project']['name']
+        except:
+            project = None
+        try:
+            changelog = data['changelog']
+        except:
+            changelog = None
+        try:
+            updated = data['issue']['fields']['updated']
+        except:
+            updated = None
+        try:
+            status = data['issue']['fields']['status']['name']
+        except:
+            status = None
+        try:
+            assignee = data['issue']['fields']['assignee']['displayName']
+        except:
+            assignee = None
+        print("-"*50)
+        print("webhookEvent:",event)
+        print("issue_event_type_name:",event_type)
+        print("User(Event updated by):", user)
+        print('Issue Key:', issue)
+        print('LastViewed:', lastViewed)
+        print('Project:', project)
+        print('Changelog:', changelog)
+        print('updated:', updated)
+        print('status:', status)
+        print('assignee:', assignee)
+
+        print("-"*50)
+    
     return HttpResponse(status=204)

@@ -1,0 +1,40 @@
+{
+  "webhooks": [
+    {
+      "id": "586756",
+      "team_id": "1288724551178337760",
+      "event_type": "FILE_UPDATE",
+      "client_id": null,
+      "endpoint": "https://8219-2401-4900-1f3f-6b73-d044-5def-dfcb-f020.ngrok-free.app/figma/",
+      "passcode": "uQb6PNuRKIuwlFfd6BOucT52jLulRPoATsn9R5W4bLr62oUvC8",
+      "status": "ACTIVE",
+      "description": null,
+      "protocol_version": "2"
+    }
+  ]
+}
+
+
+{
+  "id": "586763",
+  "team_id": "1288724551178337760",
+  "event_type": "FILE_VERSION_UPDATE",
+  "client_id": null,
+  "endpoint": "https://8219-2401-4900-1f3f-6b73-d044-5def-dfcb-f020.ngrok-free.app/figma/file_version_update/",
+  "passcode": "uQb6PNuRKIuwlFfd6BOucT52jLulRPoATsn9R5W4bLr62oUvC8",
+  "status": "ACTIVE",
+  "description": null,
+  "protocol_version": "2"
+}
+
+{
+  "id": "586765",
+  "team_id": "1288724551178337760",
+  "event_type": "FILE_DELETE",
+  "client_id": null,
+  "endpoint": "https://8219-2401-4900-1f3f-6b73-d044-5def-dfcb-f020.ngrok-free.app/figma/file_delete/",
+  "passcode": "uQb6PNuRKIuwlFfd6BOucT52jLulRPoATsn9R5W4bLr62oUvC8",
+  "status": "ACTIVE",
+  "description": null,
+  "protocol_version": "2"
+}
