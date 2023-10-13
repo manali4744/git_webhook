@@ -8,12 +8,17 @@ from django.http import HttpResponse, HttpResponseForbidden, HttpResponseServerE
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.utils.encoding import force_bytes
-
 import requests
 from ipaddress import ip_address, ip_network
 import json
 from requests.auth import HTTPBasicAuth
 import json
+
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
 
 
 def get_diff_commit_after_ID(commit_after_ID, full_name):
@@ -183,3 +188,35 @@ def JiraCRUDView(request):
         print("-"*50)
     
     return HttpResponse(status=204)
+
+
+@api_view(['POST'])
+@csrf_exempt
+def AsanaView(request):
+    print(request)
+    if request.method == "POST":
+        try:
+            secret = request.META["HTTP_X_HOOK_SECRET"]
+            print(secret)
+            url = os.environ.get('ASANA_API_WEBHOOK')
+            headers = {
+                "Authorization": f"Bearer {os.environ.get('ASANA_BEARER')}",
+                "Content-Type": "application/json",
+                "X-Hook-Secret": secret
+            }
+            data = {
+                "resource": os.environ.get('RESOURCE_ID'),
+                "target": os.environ.get('TARGET_URL'),
+            }
+            response = requests.post(url, headers=headers, json=data)
+
+            # Check the response status code and content
+            if response.status_code == 200:
+                print("Webhook created successfully")
+                print("Response content:", response.text)
+
+            return Response(status=status.HTTP_200_OK, headers=headers, data=response)
+        except:
+            payload = json.loads(request.body)
+            print(payload)
+            return HttpResponse(status=status.HTTP_200_OK) 

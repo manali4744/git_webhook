@@ -7,4 +7,5 @@ urlpatterns = [
     path('figma/', views.FigmaView, name="figma"),
     path('figma/comment/', views.FigmaView, name="FILE_COMMENT"),
     path('figma/file_pub/', views.FigmaView, name="file_pub"),
+    path('asana/', views.AsanaView, name='asana'),
 ]
