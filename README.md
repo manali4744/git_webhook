@@ -16,6 +16,8 @@ Create a .env file to store keys and tokens required for your project.
   ```bash
   $ python manage.py runserver
   ```
+  NOTE:
+    Before initiating the webhook creation process for Figma and Asana, it is essential to ensure  that  servers are       in a running state .
 
 ##  Configure Webhook in GitHub
 
@@ -34,7 +36,7 @@ Your project is now set up to track Git repository changes and identify code dif
 # Configuring Figma Webhooks for Your Ngrok Site
     Navigate to the Figma Webhooks setup page (https://www.figma.com/developers/api#webhooks-v2-post-endpoint)
 
-  Create a New Webhook:
+Create a New Webhook:
 
     Log in to your Figma account if you're not already logged in.
     On the Figma Webhooks setup page, locate the option to create a new webhook.
@@ -45,4 +47,17 @@ Fill in Data from figma_webhook.json:
     Event Type(s): Identify the events you want to trigger the webhook.
     Callback URL: This should be your Ngrok URL. Replace it with your Ngrok URL.
     Secret Key (Optional): If your webhook requires a secret key for verification, include it.
+
+# Setting Up ASANA Webhooks for Your Ngrok URL.
+
+    Obtain comprehensive information regarding the following parameters needed for ASANA webhook setup:                    
+    ASANA_BEARER_TOKEN (your authentication token), RESOURCE_ID (workspace or project ID), 
+    TARGET_URL (the URL where you expect the webhook response), and ASANA_API_WEBHOOK (the necessary API endpoint).
+
+Execute to Generate an Asana Webhook
+  ```bash
+  $ python webhook_create_asana.py
+  ```
+
+
 
